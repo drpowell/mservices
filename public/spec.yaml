@@ -1,0 +1,105 @@
+questions:
+    - type: radio
+      name: classification
+      question: What is the classification of your data?
+      help: |
+          Some info about classifcation....
+          Can be html and other
+          Ok
+      options:
+          - Very Sensitive
+          - Sensitive
+          - Restricted
+          - Public
+    - type: radio
+      name: location
+      question: Do you have geographic restrictions on your data?
+      options:
+          - Yes, data must be at Monash
+          - Yes, it must be in Australia
+    - type: checkbox
+      name: redundancy
+      question: What type of redundancy do you need in this data?
+      options:
+          - Access to previous versions of my data over the last 30 days
+          - I need to be able to restore data from a number of previous points in time that may be > 30 days
+    - type: checkbox
+      name: security
+      question: Do you have special security requirements?
+      options:
+          - I requre multi-factor authentication to access my data
+    - type: checkbox
+      name: commonwealth
+      question: Will you be using Commonwealth Government data?
+      options:
+          - I will use Commonwealth data under the DATA scheme
+services:
+    - name: Bridges
+      description: Publish stuff here
+    - name: Gmail
+      description: You know, email
+    - name: Google Forms
+    - name: Google MyDrive
+      match:
+          classification: [3]
+          location: []
+      fields:
+          - label: Brief Description
+            value: |
+                Storage in the cloud with google.  Can should be taken with owndership of this data
+    - name: Google Shared Drive
+      match:
+          classification: [3]
+          location: []
+    - name: Helix REDCap
+      match:
+          classification: [0, 1, 2, 3]
+          location: [0, 1]
+      fields:
+          - label: Brief Description
+            value: |
+                REDCap is used for surveys, and is appropriate for highly sensitive data
+          - label: Contact
+            value: |
+                <a href='https://www.monash.edu/researchinfrastructure/helix/capabilities/redcap'>REDCap webpage</a>
+    - name: Helix SFTP
+      match:
+          classification: [0, 1, 2, 3]
+          location: [0, 1]
+    - name: LabArchives
+      match:
+          classification: [3]
+    - name: Monash Laptop
+      match:
+          classification: [3]
+    - name: "M:Drive"
+      match:
+          classification: [0, 1, 2, 3]
+          location: [0, 1]
+    - name: "P:Drive"
+      match:
+          location: [0, 1]
+    - name: Qualtrics
+    - name: Qualtrics Plus
+    - name: "RDS: Market & Vault"
+      match:
+          location: [0, 1]
+    - name: "S:Drive"
+      match:
+          location: [0, 1]
+    - name: SeRP
+      match:
+          classification: [1, 2, 3]
+          location: [0, 1]
+    - name: Zoom Recordings
+    - name: OneDrive
+      match:
+          classification: [3]
+          location: []
+    - name: Sharepoint
+    - name: Microsoft Teams File Storage
+    - name: Google Chat (formerly Hangouts)
+    - name: Dropbox
+      match:
+          classification: [3]
+          location: []
