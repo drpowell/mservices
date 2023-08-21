@@ -11,7 +11,7 @@ npm install
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+./node_modules/.bin/quasar dev
 ```
 
 
@@ -34,7 +34,7 @@ npm run format
 
 ### Build the app for production
 ```bash
-quasar build
+./node_modules/.bin/quasar build
 ```
 
 ### Customize the configuration

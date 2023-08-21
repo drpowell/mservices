@@ -1,0 +1,56 @@
+questions:
+  - type: radio
+    question: What is the classification of your data?
+    help: |
+      Some info about classifcation....
+      Can be html and other
+      Ok
+    options:
+      - Very Sensitive
+      - Sensitive
+      - Restricted
+      - Public
+  - type: radio
+    question: Do you have geographic restrictions on your data?
+    options:
+      - No Restrictions
+      - Yes, data must be at Monash
+      - Yes, it must be in Australia
+  - type: checkbox
+    question: What type of redundancy do you need in this data?
+    options:
+      - Access to previous versions of my data over the last 30 days
+      - I need to be able to restore data from a number of previous points in time that may be > 30 days
+  - type: checkbox
+    question: Do you have special security requirements?
+    options:
+      - I requre multi-factor authentication to access my data
+  - type: checkbox
+    question: Will you be using Commonwealth Government data?
+    options:
+      - I will use Commonwealth data under the DATA scheme
+services:
+  - name: Bridges 
+    description: Publish stuff here
+  - name: Gmail
+    description: You know, email
+  - name: Google Forms
+  - name: Google MyDrive
+  - name: Google Shared Drive
+  - name: Helix REDCap
+  - name: Helix SFTP
+  - name: LabArchives
+  - name: Monash Laptop
+  - name: "M:Drive"
+  - name: "P:Drive"
+  - name: Qualtrics
+  - name: Qualtrics Plus
+  - name: "RDS: Market & Vault"
+  - name: "S:Drive"
+  - name: SeRP
+  - name: Zoom Recordings
+  - name: OneDrive
+  - name: Sharepoint
+  - name: Microsoft Teams File Storage
+  - name: Google Chat (formerly Hangouts)
+  - name: Dropbox
