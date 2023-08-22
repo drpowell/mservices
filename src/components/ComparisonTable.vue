@@ -15,12 +15,14 @@ const selectedServices = computed(() =>
 );
 const columns = ref([]);
 const rows = ref([]);
-
+const visibleSel = ref([]);
 watch(selectedServices, () => {
-    let cs = [{ name: "label", label: "", field: "name" }];
+    let cs = [{ name: "label", label: "", field: "name", required: true }];
     let fields = [];
     let rs = [];
+    visibleSel.value = [];
     for (const [i, s] of selectedServices.value.entries()) {
+        visibleSel.value.push(s.name);
         cs.push({
             name: s.name,
             label: s.name,
@@ -39,26 +41,45 @@ watch(selectedServices, () => {
         }
         rs.push(r);
     }
-    //     c.push({ name: s.name });
-    //     for (const f of s.fields ?? []) {
-    //         if (!r[f.label]) r[f.label] = {};
-    //     //     r[f.label][s.name] =
-    //     // }
-    // }
     // console.log("selServices", selectedServices.value);
     // console.log("cols", cs);
     // console.log("rows", rs);
+    // console.log("visible", visibleSel.value);
     columns.value = cs;
     rows.value = rs;
 });
+
+const isVisibleSel = (sel) => {
+    return visibleSel.value.includes(sel.name);
+};
+const toggleSel = (sel) => {
+    if (isVisibleSel(sel)) {
+        visibleSel.value = visibleSel.value.filter((x) => x != sel.name);
+    } else {
+        visibleSel.value.push(sel.name);
+    }
+    // console.log("visible", visibleSel.value);
+};
 </script>
 
 <template>
+    <q-btn
+        v-for="s of selectedServices"
+        :key="s.name"
+        color="primary"
+        size="xs"
+        rounded
+        :outline="!isVisibleSel(s)"
+        @click="toggleSel(s)"
+    >
+        {{ s.name }}
+    </q-btn>
     <q-table
         v-show="rows.length > 0"
         title="Comparison"
         :rows="rows"
         :columns="columns"
+        :visible-columns="visibleSel"
         row-key="name"
         separator="vertical"
         hide-pagination
