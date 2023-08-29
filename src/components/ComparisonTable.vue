@@ -28,6 +28,7 @@ watch(selectedServices, () => {
             label: s.name,
             field: "field" + i,
             align: "left",
+            classes: "table-col",
         });
         for (const f of s.fields ?? []) {
             if (!fields.includes(f.label)) fields.push(f.label);
@@ -75,11 +76,11 @@ const toggleSel = (sel) => {
         {{ s.name }}
     </q-btn>
     <q-table
-        v-show="rows.length > 0"
-        title="Comparison"
+        title="Comparison Table"
         :rows="rows"
         :columns="columns"
         :visible-columns="visibleSel"
+        no-data-label="No Services Selected"
         row-key="name"
         separator="vertical"
         hide-pagination
@@ -88,6 +89,11 @@ const toggleSel = (sel) => {
             <q-td :props="props">
                 <span v-html="props.value"></span>
             </q-td>
+        </template>
+        <template v-slot:no-data="{ message }">
+            <div class="full-width row flex-center text-accent q-gutter-sm">
+                <span> {{ message }} </span>
+            </div>
         </template>
     </q-table>
 </template>
@@ -108,11 +114,17 @@ const toggleSel = (sel) => {
 }
 
 .q-table td:first-child {
-    background-color: #eee;
+    /* background-color: #eee; */
     font-weight: bold;
+    width: 0px;
 }
 
 .q-table tr:nth-child(even) {
     background-color: #f3f3f3;
+}
+
+.q-table .table-col {
+    max-width: 20em;
+    white-space: pre-wrap;
 }
 </style>
