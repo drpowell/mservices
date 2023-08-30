@@ -47,9 +47,12 @@ const highlightService = (s) => {
 </script>
 
 <template>
-    <q-page class="flex flex-center">
+    <q-page class="flex flex-center q-pa-xl">
         <div class="row">
-            <q-scroll-area class="q-pa-sm col-3" style="max-height: 80vh">
+            <q-scroll-area
+                class="q-pa-sm col-12 col-md-3"
+                style="min-height: 50em"
+            >
                 <div class="desc">
                     <h4>Describe your data</h4>
                     Answer these questions to help identify data storage
@@ -73,7 +76,7 @@ const highlightService = (s) => {
                     @update:selected="(name, v) => (qSelected[name] = v)"
                 />
             </q-scroll-area>
-            <div class="col-6 q-mt-xl">
+            <div class="q-mt-xl col-12 col-md">
                 <Services
                     :services="spec.services"
                     :qSelected="qSelected"
@@ -82,7 +85,7 @@ const highlightService = (s) => {
                 />
             </div>
         </div>
-        <div class="row" style="width: 100%">
+        <div class="row">
             <hr />
             <div class="col-12 q-pa-xl">
                 <Comparison :services="spec.services" :sSelected="sSelected" />
