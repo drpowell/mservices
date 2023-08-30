@@ -3,31 +3,49 @@ questions:
       name: classification
       question: What is the classification of your data?
       help: |
-          Some info about classifcation....
-          Can be html and other
-          Ok
+          To determine how sensitive your research data is please use the form <a href="https://redcap.helix.monash.edu/surveys/?s=MD99XJYRNFCX79RR" target="_blank">How Sensitive is Your Research Data?</a>
       options:
           - Very Sensitive
           - Sensitive
           - Restricted
           - Public
+    - type: checkbox
+      name: actions
+      question: What do you want to do with the data?
+      help: |
+            Need to expplain these terms especially share versus transfer
+      options:
+          - Store it
+          - Share it
+          - Collect it
+          - Transfer it
+          - Publish it
     - type: radio
       name: location
       question: Do you have geographic restrictions on your data?
       options:
+          - No restrictions
           - Yes, data must be at Monash
-          - Yes, it must be in Australia
+          - Yes, data must be in Australia
+    - type: radio
+      name: dataVolume
+      question: How much data do you expect to have over the next 12-24 months
+      options: 
+          - Up to 100GB
+          - 100GB to 1TB over 2 years
+          - 1TB to 1PB over 2 years
+          - Over 1PB over 2 years
     - type: checkbox
       name: redundancy
-      question: What type of redundancy do you need in this data?
+      question: What type of back-up / redundancy do you need for this data?
       options:
           - Access to previous versions of my data over the last 30 days
-          - I need to be able to restore data from a number of previous points in time that may be > 30 days
+          - I need to be able to restore data from a number of previous points in time that may be >30 days
     - type: checkbox
       name: security
       question: Do you have special security requirements?
       options:
-          - I requre multi-factor authentication to access my data
+          - I require multi-factor authentication to access my data
     - type: checkbox
       name: commonwealth
       question: Will you be using Commonwealth Government data?
@@ -35,71 +53,598 @@ questions:
           - I will use Commonwealth data under the DATA scheme
 services:
     - name: Bridges
-      description: Publish stuff here
-    - name: Gmail
-      description: You know, email
-    - name: Google Forms
-    - name: Google MyDrive
       match:
           classification: [3]
-          location: []
+          actions: [4] 
+          location: [0]
+          dataVolume: [0]
+          redundancy: [0]
+          security: []
+          commonwealth: []
+      description: A service to publish research data and related content
       fields:
           - label: Brief Description
+            value: |                
+                Bridges is Monash University's repository for research data, collections, and research activity outputs. It is also the home of the University's online archive of PhD and Masters by Research theses. For more information see the  <a href='https://www.monash.edu/library/researchers/repositories/bridges/about'  target="_blank">About Bridges</a> page.
+          - label: Data classification
             value: |
-                Storage in the cloud with google.  Can should be taken with owndership of this data
-    - name: Google Shared Drive
-      match:
-          classification: [3]
-          location: []
-    - name: Helix REDCap
-      match:
-          classification: [0, 1, 2, 3]
-          location: [0, 1]
-      fields:
-          - label: Brief Description
+                Public data only
+          - label: Data actions
             value: |
-                REDCap is used for surveys, and is appropriate for highly sensitive data
+                Publication
+          - label: Geographic restriction
+            value: |
+                No restrictions
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days
+          - label: Special security requirements
+            value: |
+                Not applicable
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
           - label: Contact
             value: |
-                <a href='https://www.monash.edu/researchinfrastructure/helix/capabilities/redcap'>REDCap webpage</a>
-    - name: Helix SFTP
+                For assistance with Bridges please email<p><a href="mailto:librarians@monash.edu"> Monash University Library</a></p>
+    - name: Gmail (Monash)
       match:
-          classification: [0, 1, 2, 3]
-          location: [0, 1]
+          classification: [1,2,3]
+          actions: [3]
+          location: [0]
+          dataVolume: [0]
+          redundancy: [0]
+          security: [0]
+          commonwealth: []
+      description: Monash-controlled email
+      fields:
+          - label: Brief Description
+            value: |               
+                Gmail is a Monash-controlled intuitive and efficient email service that is easy to use across any device.
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Transfer
+          - label: Geographic restriction
+            value: |
+                No restrictions
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to accessdata
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Gmail please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>  
+    - name: Google Forms
+      match:
+          classification: [1,2,3]
+          actions: [2] 
+          location: [0]
+          dataVolume: [0]
+          redundancy: [0]
+          security: [0]
+          commonwealth: []
+      description: Survey-administration software
+      fields:
+          - label: Brief Description
+            value: |               
+                Google Forms allow collection of information from users by creating customised forms for surveys and questionnaires.
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Collection  
+          - label: Geographic restriction
+            value: |
+                No restrictions
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Google Forms please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>    
+    - name: Google My Drive
+      match:
+          classification: [1,2,3]
+          actions: [0]
+          location: [0]
+          dataVolume: [0]
+          redundancy: [0,1]
+          security: [0]
+          commonwealth: []
+      fields:
+          - label: Brief Description
+            value: |               
+                Google My Drive is provded by default as a place to keep your own documents. If you leave Monash, these documents will be deleted with your Google account and the people you had shared them with will no longer have access.
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Storage 
+          - label: Geographic restriction
+            value: |
+                No restrictions
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days & Ability to restore data from a number of previous points in time that may be >30 days
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Google My Drive please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>                    
+    - name: Google Shared Drive
+      match:
+          classification: [1,2,3]
+          actions: [0,1] 
+          location: [0,1]
+          dataVolume: [0]
+          redundancy: [0,1]
+          security: [0]
+          commonwealth: []
+      fields:
+          - label: Brief Description
+            value: |               
+                Google Shared Drives are requested through <a href='https://servicedeskonline-myit.onbmc.com/dwp/app/#/page/s5rafqrj'  target="_blank">myServices</a>. These are work spaces that can be shared with multiple people, including those external to Monash
+                Unlike Google My Drive, when you leave Monash, your collaborators will still be able to access documents stored in these drives.
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Storage & Sharing
+          - label: Geographic restriction
+            value: |
+                No restrictions
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days & Ability to restore data from a number of previous points in time that may be >30 days
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Google Shared Drives please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>                    
+    - name: Helix REDCap
+      match:
+          classification: [0,1,2,3]
+          actions: [2]
+          location: [0,1,2]
+          dataVolume: [0]
+          redundancy: [0]
+          security: [0]
+          commonwealth: []
+      fields:
+          - label: Brief Description
+            value: |               
+                REDCap is a secure, web-based application to create and manage research databases and/or participant surveys. It is developed to help researchers collect and manage sensitive data effectively and responsibly. REDCap's streamlined process for rapidly creating and designing projects offers a vast array of tools that can be tailored to virtually any data collection strategy.          
+          - label: Data classification
+            value: |
+                Very Sensitive, Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Collection
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be at Monash & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days & Ability to restore data from a number of previous points in time that may be >30 days
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with REDCap please email<p><a href="mailto:redcap@monash.edu"> Monash Helix</a></p>                    
     - name: LabArchives
       match:
-          classification: [3]
-    - name: Monash Laptop
+          classification: [1,2,3]
+          actions: [0,1,2]
+          location: [0,2]
+          dataVolume: [0]
+          redundancy: [0]
+          security: [0]
+          commonwealth: [] 
+      fields:
+          - label: Brief Description
+            value: |               
+                LabArchives is a digital platform that is designed to replace traditional paper research notebooks with a secure version and improved research workflow.          
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Storage & Sharing & Collection
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                Up to 100GB 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days 
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with LabArchives please email the<p><a href="mailto:eln-support@monash.edu"> ELN Support Team</a></p>
+    - name: Laptop (Monash)
       match:
-          classification: [3]
-    - name: "M:Drive"
+          classification: [1,2,3]
+          actions: [0]
+          location: [0]
+          dataVolume: [0]
+          redundancy: [0]
+          security: []
+          commonwealth: [] 
+      fields:
+          - label: Brief Description
+            value: |               
+                Monash-provided laptops are part of the Monash Standard Operating Environment
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Storage
+          - label: Geographic restriction
+            value: |
+                Monash laptops cannot enforce geographic restrictions
+          - label: Data limits
+            value: |
+                More than 100GB is not recommended 
+          - label: Back-up
+            value: |
+                Access to previous versions of data over the last 30 days
+          - label: Special security requirements
+            value: |
+                Does not have multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Monash laptops please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>  
+    - name: M:Drive      
       match:
-          classification: [0, 1, 2, 3]
-          location: [0, 1]
-    - name: "P:Drive"
+          classification: [0,1,2,3]
+          actions: [2,3]  
+          location: [0,1,2]
+          dataVolume: [0,1]
+          redundancy: [0]
+          security: []
+          commonwealth: [] 
+      fields:
+          - label: Brief Description
+            value: |               
+                Monash Drive is an implementation of IBM Aspera On Cloud for Monash Staff. It is a platform to facilitate the secure exchange of files and folders between Monash staff and their internal and external collaborators. Monash Drive is built on a hybrid-cloud infrastructure. While the interface you are using is hosted on Aspera On Cloud, your data is stored and managed on Monash On-Premise Storage using Secure Data Enclaves (Monash ISO 27001 Certified Infrastructure). Your data does not get to any third party on its way to/from our storage. 
+          - label: Data classification
+            value: |
+                Very Sensitive, Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Collection & Transfer
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be at Monash & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                100GB as standard but more storage can be requested  
+          - label: Backup
+            value: |
+                Access to previous versions of data over the last 30 days
+          - label: Special security requirements
+            value: |
+                Does not have multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with M:Drive please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>
+    - name: P:Drive      
       match:
-          location: [0, 1]
+          classification: [0,1,2,3]
+          actions: [0,1]
+          location: [0,1,2]
+          dataVolume: [0,1,2,3]
+          redundancy: [0,1]
+          security: [0]
+          commonwealth: [0]
+      fields:
+          - label: Brief Description
+            value: |               
+                P:Drive is a software-defined, secure, and centralised private cloud infrastructure that aims to give Monash enterprise users and researchers a safe environment to host, process, and analyse their sensitive data. The platform has been designed and built with security as one of its main objectives..
+          - label: Data classification
+            value: |
+                Very Sensitive, Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Collection & Sharing
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be at Monash & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                100GB as standard but more storage can be requested  
+          - label: Backup
+            value: |
+                Access to previous versions of data over the last 30 days as standard but longer periods can be requested
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Can be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with P:Drive please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>
     - name: Qualtrics
+      match:
+          classification: [0,1,2,3]
+          actions: [2]
+          location: [0]
+          dataVolume: [0]
+          redundancy: []
+          security: [0]
+          commonwealth: []
+      fields:
+          - label: Brief Description
+            value: |               
+                Qualtrics is an easy to use online survey platform if you require more detailed information from participants for surveys and questionnaires.
+          - label: Data classification
+            value: |
+                Very Sensitive, Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Collection
+          - label: Geographic restriction
+            value: |
+                No restrictions
+          - label: Data limits
+            value: |
+                Up to 100GB  
+          - label: Backup
+            value: |
+                Not backed up
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data except for external collaborators
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Qualtrics please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>
     - name: Qualtrics Plus
-    - name: "RDS: Market & Vault"
       match:
-          location: [0, 1]
-    - name: "S:Drive"
+          classification: [0,1,2,3]
+          actions: [2] 
+          location: [0,2]
+          dataVolume: [0]
+          redundancy: []
+          security: [0]
+          commonwealth: []  
+      fields:
+          - label: Brief Description
+            value: |               
+                Helix provides Qualtrics as a managed service (Qualtrics Plus), which is an easy-to-use online survey platform with additional privacy, security and oversight suitable for research..
+          - label: Data classification
+            value: |
+                Very Sensitive, Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Collection
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                Up to 100GB  
+          - label: Backup
+            value: |
+                Not backed up
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Qualtrics Plus please email<p><a href="mailto:Helix-Enquiries@monash.edu"> Monash Helix</a></p> 
+    - name: RDS Market & Vault
       match:
-          location: [0, 1]
+          classification: [2,3]
+          actions: [0,1]
+          location: [0,1,2]
+          dataVolume: [0,1,2,3]
+          redundancy: [0,1]
+          security: [0]
+          commonwealth: [] 
+      fields:
+          - label: Brief Description
+            value: |               
+                Market storage (also known as Market-file) is a disk-based storage product that is designed to support research data that is accessed regularly (usually every day) by researchers. Market storage closely resembles the Monash University S:\ Drive and is suitable for data that changes frequently and needs to be available for daily work but is too large to be stored on a local machine. Vault storage is a tape-based storage product that is designed to accommodate long-term data storage and is best used for data that must be retained for reference but is unlikely to be accessed every day. Vault is also the best place to store redundant backups of data that is being stored locally.
+          - label: Data classification
+            value: |
+                Restricted & Public
+          - label: Data actions
+            value: |
+                Collection & Sharing
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be at Monash & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                over 1PB  
+          - label: Backup
+            value: |
+                Access to previous versions of data over the last 30 days & Ability to restore data from a number of previous points in time that may be >30 days
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data only if using VPN
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with RDS Market and Vault storage please email the <p><a href="mailto:merc-rdsm-support@monash.edu">Research Data Storage Team</a></p> 
+    - name: S:Drive      
+      match:
+          classification: [0,1,2,3]
+          actions: [0,1] 
+          location: [0,1,2]
+          dataVolume: [0,1]
+          redundancy: [0,1]
+          security: [0]
+          commonwealth: [] 
+      fields:
+          - label: Brief Description
+            value: |               
+                S:Drive is maanged by eSolutions and allows users to securely store files on Monash storage infrastructure. VPN is required when offsite, and external accounts are available for collaborator access.    
+          - label: Data classification
+            value: |
+                Very Sensitive, Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Storage & Sharing
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be at Monash & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                Up to 100GB but more storage can be requested  
+          - label: Backup
+            value: |
+                Access to previous versions of data over the last 30 days & Longer storage by request
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data only if using VPN
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with S:Drive please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>    
     - name: SeRP
       match:
-          classification: [1, 2, 3]
-          location: [0, 1]
+          classification: [1,2,3]
+          actions: [1] 
+          location: [0,1,2]
+          dataVolume: [0,1,2,3]
+          redundancy: [0]
+          security: [0]
+          commonwealth: []
+      fields:
+          - label: Brief Description
+            value: |               
+                Monash Secure eResearch Platform (SeRP) is a secure environment for sharing research data for collaboration and analysis, within the control and governance of the data custodian. Monash SeRP allows the Data custodian or the delegated project manager (Data Custodian) to have visibility and control over how their data is being used by other approved researchers.
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Sharing
+          - label: Geographic restriction
+            value: |
+                No restrictions & Yes, data must be at Monash & Yes, data must be in Australia
+          - label: Data limits
+            value: |
+                Up to 100GB  
+          - label: Backup
+            value: |
+                Access to previous versions of data over the last 30 days 
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication to access data
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with SeRP please email<p><a href="mailto:helix@monash.edu"> Monash Helix</a></p>
     - name: Zoom Recordings
-    - name: OneDrive
       match:
-          classification: [3]
-          location: []
-    - name: Sharepoint
-    - name: Microsoft Teams File Storage
-    - name: Google Chat (formerly Hangouts)
-    - name: Dropbox
-      match:
-          classification: [3]
-          location: []
+          classification: [1,2,3]
+          actions: [0,2]
+          location: [0]
+          dataVolume: [0]
+          redundancy: [0]
+          security: []
+          commonwealth: []
+      fields:
+          - label: Brief Description
+            value: |               
+                Zoom conferencing allows users to broadcast a lecture or meeting to one or more rooms, across multiple campuses and external locations. it can also be used to communicate and collaborate with multiple parties, both internal and external.
+          - label: Data classification
+            value: |
+                Sensitive, Restricted & Public
+          - label: Data actions
+            value: |
+                Storage & Collection
+          - label: Geographic restriction
+            value: |
+                No restrictions & Geographic restrictions cannot be enforced 
+          - label: Data limits
+            value: |
+                Up to 100GB  
+          - label: Backup
+            value: |
+                Access to previous versions of data over the last 30 days 
+          - label: Special security requirements
+            value: |
+                Multi-factor authentication does not apply
+          - label: DATA Scheme use
+            value: |
+                Cannot be used for DATA scheme data
+          - label: Contact
+            value: |
+                For assistance with Zoom please contact the <a href='https://www.monash.edu/esolutions/contact'  target="_blank">eSolutions Service Desk</a>
